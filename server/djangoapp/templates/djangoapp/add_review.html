@@ -8,9 +8,88 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
 </head>
     <body>
-    <!--Add review form here -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Awesome Dealer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="{% url 'djangoapp:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact us</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" >
+                            <input type="password" class="form-control" placeholder="Username" name="psw" >
+                            <button class="btn btn-primary" type="submit">Login</button>
+                            <a class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                        </div>
+                    </form>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div id="submission">           
+            {% if user.is_authenticated %}
+            <h4>Write a review about {{dealership.full_name}}</h4>
+            <form id="reviewForm" action="{% url 'djangoapp:add_review' dealership.id %}" method="post">
+                <div class="form-group">
+                    <div>
+                        <label>Enter review:</label>
+                        <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
+                    </div>
+                    <div> 
+                        <label>Purchased</label>
+                        <input class="form-check-input" type="checkbox" name="purchasedVehicle" id="purchasedVehicle" onclick="isChecked()"> 
+                    <div>
+                    <div>
+                        <label for="purchasedate">Purchase Date: </label>
+                        <input class="date-own form-control purchasedate" style="width: 300px; margin :12px;" type="text" name="purchasedate" id="purchasedate">
+                    </div>
+                    <div>
+                        <label for="car">Select your car (make-model-year):</label> 
+                        <select name="car" id="car" class="form-select" required>
+                            {% for car in cars %}
+                            <option selected value="{{car.id}}">{{car.make.name}}-{{car.name}}-{{ car.year|date:"Y" }}</option>  
+                            {% endfor %}
+                        </select>
+                    </div>          
+                    <input class="btn btn-success btn-block" type="submit" value="Submit">
+                </div>
+            </form>
+            {% else %}
+    
+    
+            {% endif %}
+        </div>
+    
     </body>
+    <script type="text/javascript">
+        $('.purchasedate').datepicker({
+           format: 'mm/dd/yyyy'
+         });
+    
+        function isChecked() {
+                var x = document.getElementById("purchasedVehicle").checked;
+                document.getElementById("purchasedInfo").disabled = !x
+        }
+    </script>
 </html>
