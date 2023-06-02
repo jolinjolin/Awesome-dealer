@@ -31,7 +31,7 @@ Clone the repository:
 Navigate to the server directory:
 
 ```bash
-   git clone <repository_url>
+   cd server
 ```
 
 Install the required dependencies:
