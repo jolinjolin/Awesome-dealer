@@ -1,36 +1,53 @@
-# Final Project Template
+# Aweome dealer - A Car Dealership Review Platform
 
-The final project for this course has several steps that you must complete. 
-To give you an overview of the whole project, all the high-level steps are listed below. 
-The project is then divided into several smaller labs that give the detailed instructions for each step. 
-You must complete all the labs to successfully complete the project.
+This is a comprehensive web application that serves as a review platform for car dealerships. It offers a wide range of features to enhance the car dealership searching experience, allowing users to explore an extensive collection of car models, access detailed specifications, read authentic user reviews, and leave comments. 
 
-## Project Breakdown
+## Key Features
 
-**Prework: Sign up for IBM Cloud account and create a Watson Natural language Understanding service**
-1. Create an IBM cloud account if you don't have one already.
-2. Create an instance of the Natural Language Understanding (NLU) service.
+- Explore an extensive collection of car models
+- Access detailed specifications and features of each car
+- Read authentic user reviews
+- Leave comments and interact with other users
+- Perform sentiment analysis on reviews using IBM NLP (Natural Language Processing) tools
+- Automatically add emojis to reviews based on sentiment
+- User-friendly and intuitive interface
 
-**Fork the project Github repository with a project then build and deploy the template project**
-1. Fork the repository in your account
-2. Clone the repository in the theia lab environment
-3. Create static pages to finish the user stories
-4. Deploy the application on IBM Cloud
+## Technologies Used
 
-**Add user management to the application**
-1. Implement user management using the Django user authentication system.
-2. Set up continuous integration and delivery
+- Django framework for Full Stack development
+- IBM NLP tools for sentiment analysis
+- Docker for containerization
+- Kubernetes for orchestration
+- IBM Cloud for scalable deployment
 
-**Implement backend services**
-1. Create cloud functions to manage dealers and reviews
-2. Create Django models and views to manage car model and car make
-3. Create Django proxy services and views to integrate dealers, reviews, and cars together
- 
-**Add dynamic pages with Django templates**
-1. Create a page that shows all the dealers
-2. Create a page that show reviews for a selected dealer
-3. Create a page that let's the end user add a review for a selected dealer
+## Setup Instructions
 
-**Containerize your application**
-1. Add deployment artifacts to your application
-2. Deploy your application
+Clone the repository:
+
+   ```bash
+   git clone <repository_url>
+   ```
+
+Navigate to the server directory:
+
+```bash
+   git clone <repository_url>
+```
+
+Install the required dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Run the server:
+
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+
+Create a superuser:
+```bash
+python manage.py createsuperuser
+```
